@@ -3,7 +3,29 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const hearts = document.querySelector('.like-glyph');
+hearts.addEventListener('click', ()=>{
+  mimicServerCall()
+  .then(() =>{
+    if(hearts.className !== "activated-heart"){
+      hearts.className = "activated-heart"
+      hearts.innerHTML = FULL_HEART
+    } else {
+        hearts.className = "like-glyph"
+      hearts.innerHTML = EMPTY_HEART
 
+      }
+  })
+  .catch((error)=>{
+    console.error(error);
+    const modal = document.getElementById('modal');
+    modal.className = ''
+    modal.innerHTML = error;
+    setTimeout(() => {
+      modal.className = "hidden"}, 3000)
+
+  })
+})
 
 
 
